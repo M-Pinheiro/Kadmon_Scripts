@@ -3,35 +3,46 @@
 
 # Script has been modified according to running on the Kadmon System. 
 # Modify library type options based on RNA-seq protocol - protocol is TruSeq - type is fr-unstranded - should appear as defulat option.
+# Load modules for Kadmon
 
+#!/bin/bash -l
+
+source /etc/profile.d/modules.sh
+module load apps/samtools/0.1.19
 module load apps/bowtie2/2.2.2
 module load apps/tophat/2.0.11
+module load apps/cufflinks/2.2.0
+
+# Create symlinks to Genome_Annotation.
+
+ln -s /mnt/fls01-home01/mfbx9mp5/scratch/Drosophila_melanogaster/Ensembl/BDGP5.25/Annotation/Genes/genes.gtf .
+ln -s /mnt/fls01-home01/mfbx9mp5/scratch/Drosophila_melanogaster/Ensembl/BDGP5.25/Sequence/Bowtie2Index/genome.* .
 
 # Step 1: Align the RNA-seq reads to the genome - Map the reads for each sample to the reference genome:
 
-tophat -p 8 -G genes.gtf -o 0-2 genome SRR767606_1.fq SRR767606_2.fq
+tophat -p 8 -G genes.gtf -o 0-2 genome /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767606_1.fastq /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767606_2.fastq
 
-tophat -p 8 -G genes.gtf -o 2-4 genome SRR767626_1.fq SRR767626_2.fq
+tophat -p 8 -G genes.gtf -o 2-4 genome /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767626_1.fastq /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767626_2.fastq
 
-tophat -p 8 -G genes.gtf -o 4-6 genome SRR767609_1.fq SRR767609_2.fq
+tophat -p 8 -G genes.gtf -o 4-6 genome /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767609_1.fastq /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767609_2.fastq
 
-tophat -p 8 -G genes.gtf -o 6-8 genome SRR767610_1.fq SRR767610_2.fq
+tophat -p 8 -G genes.gtf -o 6-8 genome /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767610_1.fastq /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767610_2.fastq
 
-tophat -p 8 -G genes.gtf -o 8-10 genome SRR767615_1.fq SRR767615_2.fq
+tophat -p 8 -G genes.gtf -o 8-10 genome /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767615_1.fastq /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767615_2.fastq
 
-tophat -p 8 -G genes.gtf -o 10-12 genome SRR767616_1.fq SRR767616_2.fq
+tophat -p 8 -G genes.gtf -o 10-12 genome /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767616_1.fastq /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767616_2.fastq
 
-tophat -p 8 -G genes.gtf -o 12-14 genome SRR767613_1.fq SRR767613_2.fq
+tophat -p 8 -G genes.gtf -o 12-14 genome /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767613_1.fastq /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767613_2.fastq
 
-tophat -p 8 -G genes.gtf -o 14-16 genome SRR767618_1.fq SRR767618_2.fq
+tophat -p 8 -G genes.gtf -o 14-16 genome /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767618_1.fastq /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767618_2.fastq
 
-tophat -p 8 -G genes.gtf -o 16-18 genome SRR767605_1.fq SRR767605_2.fq
+tophat -p 8 -G genes.gtf -o 16-18 genome /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767605_1.fastq /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767605_2.fastq
 
-tophat -p 8 -G genes.gtf -o 18-20 genome SRR767622_1.fq SRR767622_2.fq
+tophat -p 8 -G genes.gtf -o 18-20 genome /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767622_1.fastq /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767622_2.fastq
 
-tophat -p 8 -G genes.gtf -o 20-22 genome SRR767620_1.fq SRR767620_2.fq
+tophat -p 8 -G genes.gtf -o 20-22 genome /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767620_1.fastq /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767620_2.fastq
 
-tophat -p 8 -G genes.gtf -o 22-24 genome SRR767625_1.fq SRR767625_2.fq
+tophat -p 8 -G genes.gtf -o 22-24 genome /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767625_1.fastq /mnt/fls01-home01/mfbx9mp5/scratch/SRA_archive/SRR767625_2.fastq
 
 module load apps/cufflinks/2.2.0 
 
